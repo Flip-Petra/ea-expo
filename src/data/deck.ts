@@ -1,6 +1,6 @@
 // Datos reales del TDP. Fuentes:
 // - Cadenas y bloques: TDP/Fuentes/busquedas/estado-del-arte/p*.toml (searches.json)
-// - Conteos: Tabla 25 de 3.2 (coinciden con los CSV del repo)
+// - Conteos: Tablas 27–28 y trazabilidad del 07/11/2026 (IEEE reexportado con filtros)
 // - Matrices de enfrentamiento y benchmarking: Tablas 35–48 de 3.3
 // - Papers madre y expositor: Simulacro (Fabrizio 1.º y 3.º, Stefanie 2.º y 4.º)
 import searches from './searches.json';
@@ -52,12 +52,12 @@ const ieeeFilters = (journals = true) => [
   { k: 'Content Type', v: journals ? 'Journals' : 'Sin filtro (exportado así)' },
 ];
 
-function dbs(id: string, date: string, n: [number, number, number], opts: { wosYears?: string; ieeeJournals?: boolean; notes?: Partial<Record<DbId, string>> } = {}): DbConf[] {
+function dbs(id: string, date: string, n: [number, number, number], opts: { wosYears?: string; ieeeJournals?: boolean; ieeeDate?: string; notes?: Partial<Record<DbId, string>> } = {}): DbConf[] {
   const q = SR[id].queries;
   return [
     { id: 'scopus', label: 'Scopus', field: 'TITLE-ABS-KEY', query: q.SCOPUS, filters: SC_FILTERS, expected: n[0], date, note: opts.notes?.scopus },
     { id: 'wos', label: 'Web of Science', field: 'Topic (TS)', query: q.WOS, filters: wosFilters(opts.wosYears), expected: n[1], date, note: opts.notes?.wos },
-    { id: 'ieee', label: 'IEEE Xplore', field: 'All Metadata', query: q.IEEE, filters: ieeeFilters(opts.ieeeJournals ?? true), expected: n[2], date, note: opts.notes?.ieee },
+    { id: 'ieee', label: 'IEEE Xplore', field: 'All Metadata', query: q.IEEE, filters: ieeeFilters(opts.ieeeJournals ?? true), expected: n[2], date: opts.ieeeDate ?? date, note: opts.notes?.ieee },
   ];
 }
 
@@ -99,7 +99,7 @@ export const DECK = {
       objective: { code: 'OE2 y OE3', text: 'Qué mecanismos de coordinación ya resolvió la literatura y cuáles tiene que diseñar y construir Petra v2.' },
       rationale: 'Las tareas se estancan porque nadie vigila plazos, no hay responsables alternos y nada escala cuando alguien no responde.',
       blocks: SR.P2.blocks,
-      databases: dbs('P2', '2026-10-03', [18, 6, 3], { notes: { ieee: 'IEEE filtra por fecha en línea: dos registros son de 2024.' } }),
+      databases: dbs('P2', '2026-10-03', [18, 6, 0], { ieeeDate: '2026-11-07', notes: { ieee: 'Reexportada el 07/11/2026 con filtros. La anterior (3) no aplicó el año y traía un BPMs de robótica.' } }),
       criteria: ['Plazos', 'Escalamiento', 'Delegación y alternos', 'Configurabilidad', 'Asignación', 'Validación humana', 'Trazabilidad', 'Roles y segregación'],
       papers: [
         { name: 'Xu', year: 2026, scores: [2, 1, 1, 5, 1, 4, 1, 4] },
@@ -125,8 +125,8 @@ export const DECK = {
       rationale: 'Petra v1 perdió el uso en la entrada: las solicitudes llegan como texto libre y alguien tiene que convertirlas a mano en un proceso.',
       blocks: SR.P3.blocks,
       databases: dbs('P3', '2026-10-24', [115, 85, 22], {
-        wosYears: '2024–2026 (así se ejecutó)', ieeeJournals: false,
-        notes: { wos: 'Entraron 4 registros de 2024 y 2 de 2027; se excluyeron por IC1.', ieee: 'Sin filtro Journals: conferencias y libros se excluyen por EC1. Omite «request triage» y «ticket triage».' },
+        wosYears: '2024–2026 (así se ejecutó)', ieeeDate: '2026-11-07',
+        notes: { wos: 'Entraron 4 registros de 2024 y 2 de 2027; se excluyeron por IC1.', ieee: 'Reexportada el 07/11/2026 con Journals (antes 22). Omite «request triage» y «ticket triage».' },
       }),
       criteria: ['Clasificación del tipo de solicitud', 'Extracción de campos', 'Validación humana', 'Privacidad y modelo local', 'Uso sin entrenamiento', 'Recuperación de casos similares', 'Enrutamiento', 'Interfaz conversacional'],
       papers: [
@@ -152,7 +152,7 @@ export const DECK = {
       objective: { code: 'OE4', text: 'Con qué métodos y con qué fiabilidad se miden el tiempo de ciclo y las tareas estancadas antes y después del motor.' },
       rationale: 'Sin medir desde el registro de eventos no se puede demostrar que Petra v2 reduce el tiempo de ciclo frente a la línea base.',
       blocks: SR.P4.blocks,
-      databases: dbs('P4', '2026-10-03', [76, 34, 14]),
+      databases: dbs('P4', '2026-10-03', [76, 34, 6], { ieeeDate: '2026-11-07', notes: { ieee: 'Reexportada el 07/11/2026 con filtros (antes 14); ya no trae a Malashin.' } }),
       criteria: ['Tiempo de ciclo y latencia', 'Plazos vencidos y umbrales', 'Estancamiento e inactividad', 'Comparación antes y después', 'Carga por responsable', 'Causas de la demora', 'Presentación a quien no es analista', 'Enfoque centrado en objetos'],
       papers: [
         { name: 'Park', year: 2025, scores: [4, 5, 2, 1, 1, 1, 2, 5] },
@@ -178,10 +178,10 @@ export const DECK = {
       rationale: 'Muchos encargos llegan como notas de voz por WhatsApp o se acuerdan en reuniones presenciales y nunca se registran.',
       blocks: SR.P5.blocks,
       databases: [
-        ...dbs('P5', '2026-11-04', [11, 8, 29], { ieeeJournals: false, notes: { ieee: 'La exportación salió sin el filtro Journals: 29 ponencias, excluidas por EC1.' } }),
+        ...dbs('P5', '2026-11-04', [11, 8, 29], { ieeeJournals: false, notes: { ieee: 'Sin filtro Journals: 29 ponencias, excluidas por EC1. Repetida el 07/11: 27 ponencias y 0 artículos de revista.' } }),
         { id: 'scopusB', label: 'Scopus · compl.', field: 'TITLE-ABS-KEY', query: SR.P5.queries.SCOPUSB, filters: SC_FILTERS, expected: 432, date: '2026-11-04', note: 'Cadena complementaria sin el bloque de voz.' },
         { id: 'wosB', label: 'WoS · compl.', field: 'Topic (TS)', query: SR.P5.queries.WOSB, filters: wosFilters(), expected: 8, date: '2026-11-04', note: 'Complementaria: devolvió los mismos 8 registros de la principal.' },
-        { id: 'ieeeB', label: 'IEEE · compl.', field: 'All Metadata', query: SR.P5.queries.IEEEB, filters: ieeeFilters(true), expected: 21, date: '2026-11-04', note: 'Cadena complementaria sin el bloque de voz.' },
+        { id: 'ieeeB', label: 'IEEE · compl.', field: 'All Metadata', query: SR.P5.queries.IEEEB, filters: ieeeFilters(true), expected: 13, date: '2026-11-07', note: 'Reexportada con filtro de año (antes 21; los 8 de diferencia eran de 2024).' },
       ],
       criteria: ['Tareas, acuerdos y decisiones', 'Responsable y plazo', 'Validación humana antes de registrar', 'Reconocimiento de voz y de hablantes', 'Privacidad, consentimiento y modelo local', 'Uso sin entrenamiento', 'Resumen o acta general'],
       papers: [
