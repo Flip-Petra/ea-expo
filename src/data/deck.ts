@@ -30,7 +30,7 @@ export interface Question {
   databases: DbConf[];
   criteria: string[]; // ordenados de mayor a menor peso (A, B, C…)
   papers: Paper[]; // en el orden de la tabla de benchmarking
-  mothers: { author: string; year: number; presenter: 'Fabrizio' | 'Stefanie' }[];
+  mothers: { author: string; year: number; presenter: 'Fabrizio' | 'Stefanie'; src: { q: string; db: 'SCOPUS' | 'WOS' }; also: string[]; title: string }[];
 }
 
 type S = { blocks: { name: string; terms: string[] }[]; queries: Record<string, string> };
@@ -61,6 +61,11 @@ function dbs(id: string, date: string, n: [number, number, number], opts: { wosY
   ];
 }
 
+/** Cadena exacta de la que sale un paper madre (verificada en los CSV OFICIAL de Trazabilidad/CSV-por-pregunta). */
+export function motherSource(m: Question['mothers'][number]) {
+  return { label: `${m.src.q} · ${m.src.db === 'WOS' ? 'Web of Science' : 'Scopus'}`, query: SR[m.src.q].queries[m.src.db] };
+}
+
 export const DECK = {
   meta: {
     subtitle: 'Petra v2: motor configurable de flujos de trabajo con creación de solicitudes asistida por IA para Flip Inversiones',
@@ -87,10 +92,10 @@ export const DECK = {
         { name: 'Singh', year: 2026, scores: [1, 3, 1, 1, 1, 1, 3, 3] },
       ],
       mothers: [
-        { author: 'Al-Hiyari', year: 2025, presenter: 'Fabrizio' },
-        { author: 'Bernat', year: 2026, presenter: 'Stefanie' },
-        { author: 'Olortegui-Alcalde', year: 2025, presenter: 'Fabrizio' },
-        { author: 'Kobets', year: 2025, presenter: 'Stefanie' },
+        { author: 'Al-Hiyari', year: 2025, presenter: 'Fabrizio', src: { q: 'P1', db: 'SCOPUS' }, also: [], title: 'Antecedents and consequences of automated VAT solution adoption in Gulf cooperation countries: the case of the United Arab Emirates' },
+        { author: 'Bernat', year: 2026, presenter: 'Stefanie', src: { q: 'P1', db: 'WOS' }, also: ['P1 · Scopus'], title: 'Digital Transformation and Innovation in an Entrepreneurial Fintech SME: Implications for Social Sustainability from the PiggyVest Case' },
+        { author: 'Olortegui-Alcalde', year: 2025, presenter: 'Fabrizio', src: { q: 'P1', db: 'SCOPUS' }, also: [], title: 'Digital innovation and performance of student startups in Peru: A PLS-SEM evaluation' },
+        { author: 'Kobets', year: 2025, presenter: 'Stefanie', src: { q: 'P1', db: 'SCOPUS' }, also: [], title: 'Using big data to increase the efficiency of business processes in the digital economy of Ukraine' },
       ],
     },
     {
@@ -112,10 +117,10 @@ export const DECK = {
         { name: 'Zhu', year: 2025, scores: [4, 1, 1, 1, 4, 1, 1, 1] },
       ],
       mothers: [
-        { author: 'Zhu', year: 2025, presenter: 'Fabrizio' },
-        { author: 'Xu', year: 2026, presenter: 'Stefanie' },
-        { author: 'Zaki', year: 2026, presenter: 'Fabrizio' },
-        { author: 'Ilieva', year: 2026, presenter: 'Stefanie' },
+        { author: 'Zhu', year: 2025, presenter: 'Fabrizio', src: { q: 'P2', db: 'WOS' }, also: ['P2 · Scopus'], title: 'Deadline-constrained and bi-objective workflow scheduling with fuzziness in cloud computing systems' },
+        { author: 'Xu', year: 2026, presenter: 'Stefanie', src: { q: 'P2', db: 'WOS' }, also: ['P2 · Scopus'], title: 'Managing astronomical observing proposals with AstroPropose: A customizable framework applied to the Einstein Probe mission' },
+        { author: 'Zaki', year: 2026, presenter: 'Fabrizio', src: { q: 'P4', db: 'WOS' }, also: ['P4 · Scopus'], title: 'Validating temporal compliance patterns: A unified approach with MTLf over various data models' },
+        { author: 'Ilieva', year: 2026, presenter: 'Stefanie', src: { q: 'P2', db: 'WOS' }, also: ['P2 · Scopus'], title: 'A Generative AI-Based Framework for Business Process Orchestration in Industrial Enterprises' },
       ],
     },
     {
@@ -140,10 +145,10 @@ export const DECK = {
         { name: 'Towhid', year: 2026, scores: [5, 1, 1, 3, 4, 5, 2, 1] },
       ],
       mothers: [
-        { author: 'Iwaszenko', year: 2026, presenter: 'Fabrizio' },
-        { author: 'Gao', year: 2026, presenter: 'Stefanie' },
-        { author: 'Carroll', year: 2026, presenter: 'Fabrizio' },
-        { author: 'Knezevic', year: 2026, presenter: 'Stefanie' },
+        { author: 'Iwaszenko', year: 2026, presenter: 'Fabrizio', src: { q: 'P3', db: 'WOS' }, also: ['P3 · Scopus'], title: 'NLP System for Automation of Document Workflow in a Research and Development Organization—A Case Study' },
+        { author: 'Gao', year: 2026, presenter: 'Stefanie', src: { q: 'P3', db: 'SCOPUS' }, also: [], title: 'An AI-driven integrated framework for procurement planning and tender document generation based on natural language processing' },
+        { author: 'Carroll', year: 2026, presenter: 'Fabrizio', src: { q: 'P3', db: 'SCOPUS' }, also: [], title: 'Evaluating large language models for automated REDCap support ticket triage and response' },
+        { author: 'Knezevic', year: 2026, presenter: 'Stefanie', src: { q: 'P3', db: 'WOS' }, also: ['P3 · Scopus'], title: 'Retrieval-Augmented Large Language Model-Based Framework for Hierarchical Classification of Public Feedback on Transportation Infrastructure' },
       ],
     },
     {
@@ -165,10 +170,10 @@ export const DECK = {
         { name: 'Guo', year: 2026, scores: [4, 5, 1, 3, 4, 5, 2, 1] },
       ],
       mothers: [
-        { author: 'Guo', year: 2026, presenter: 'Fabrizio' },
-        { author: 'Butoracová', year: 2026, presenter: 'Stefanie' },
-        { author: 'Park', year: 2025, presenter: 'Stefanie' },
-        { author: 'López-Pintado', year: 2025, presenter: 'Fabrizio' },
+        { author: 'Guo', year: 2026, presenter: 'Fabrizio', src: { q: 'P4', db: 'SCOPUS' }, also: ['P4 · Web of Science'], title: 'Detecting Root Causes for Process Performance Anomalies Using Causal Inference' },
+        { author: 'Butoracová', year: 2026, presenter: 'Stefanie', src: { q: 'P4', db: 'SCOPUS' }, also: [], title: 'Optimizing State Aid Processes During COVID-19 in the Slovak Republic: Model, Simulation, and Savings' },
+        { author: 'Park', year: 2025, presenter: 'Stefanie', src: { q: 'P4', db: 'SCOPUS' }, also: [], title: 'Operational process monitoring: An object-centric approach' },
+        { author: 'López-Pintado', year: 2025, presenter: 'Fabrizio', src: { q: 'P4', db: 'SCOPUS' }, also: [], title: 'Business process simulation: Probabilistic modeling of intermittent resource availability and multitasking behavior' },
       ],
     },
     {
@@ -194,10 +199,10 @@ export const DECK = {
         { name: 'Liu', year: 2025, scores: [2, 1, 2, 2, 2, 3, 4] },
       ],
       mothers: [
-        { author: 'Asthana', year: 2025, presenter: 'Fabrizio' },
-        { author: 'Alshwiah', year: 2026, presenter: 'Stefanie' },
-        { author: 'Chen', year: 2025, presenter: 'Fabrizio' },
-        { author: 'Sood', year: 2026, presenter: 'Stefanie' },
+        { author: 'Asthana', year: 2025, presenter: 'Fabrizio', src: { q: 'P5', db: 'SCOPUS' }, also: ['P5 · Scopus complementaria'], title: 'Summaries, Highlights, and Action Items: Design, Implementation and Evaluation of an LLM-powered Meeting Recap System' },
+        { author: 'Alshwiah', year: 2026, presenter: 'Stefanie', src: { q: 'P5', db: 'SCOPUS' }, also: ['P5 · Scopus complementaria'], title: 'The role of artificial intelligence (AI) in assisting students with writing Zoom meeting minutes: a qualitative study' },
+        { author: 'Chen', year: 2025, presenter: 'Fabrizio', src: { q: 'P5', db: 'WOS' }, also: ['P5 · WoS complementaria'], title: 'Meet2Mitigate: An LLM-powered framework for real-time issue identification and mitigation from construction meeting discourse' },
+        { author: 'Sood', year: 2026, presenter: 'Stefanie', src: { q: 'P5', db: 'WOS' }, also: ['P5 · Scopus', 'P5 · Scopus complementaria', 'P5 · WoS complementaria'], title: 'MeetMulti-X: A benchmark analysis of scaling and prompting large language models on automatic minuting' },
       ],
     },
   ] as Question[],

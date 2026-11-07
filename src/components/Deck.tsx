@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
-import { DECK, type Question } from '../data/deck';
+import { DECK, motherSource, type Question } from '../data/deck';
 
 type Kind = 'cover' | 'hero' | 'kw' | 'copy' | 'matrix' | 'bench' | 'madre' | 'end';
 interface Step { kind: Kind; qi?: number; mi?: number; phases: number }
@@ -164,6 +164,7 @@ export default function Deck() {
       else if (k === 'Home') { e.preventDefault(); go(0); }
       else if (k === 'End') { e.preventDefault(); go(steps.length - 1); }
       else if (k === 'c' && st.kind === 'copy' && q) { e.preventDefault(); doCopy(q.databases[tab].query, tab); }
+      else if (k === 'c' && st.kind === 'madre' && q) { e.preventDefault(); doCopy(motherSource(q.mothers[st.mi!]).query, MADRE_COPY); }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -215,7 +216,7 @@ export default function Deck() {
             {st.kind === 'copy' && q && <Copy q={q} tab={tab} setTab={(t) => { setTab(t); setCopied(null); }} copied={copied} onCopy={doCopy} />}
             {st.kind === 'matrix' && q && <Matrix q={q} p={p} />}
             {st.kind === 'bench' && q && <Bench q={q} p={p} />}
-            {st.kind === 'madre' && q && <Madre q={q} mi={st.mi!} />}
+            {st.kind === 'madre' && q && <Madre q={q} mi={st.mi!} copied={copied} onCopy={doCopy} />}
             {st.kind === 'end' && <End />}
           </div>
 
@@ -574,17 +575,43 @@ function Bench({ q, p }: { q: Question; p: number }) {
   );
 }
 
-function Madre({ q, mi }: { q: Question; mi: number }) {
+const MADRE_COPY = 99;
+
+function Madre({ q, mi, copied, onCopy }: { q: Question; mi: number; copied: number | 'fail' | null; onCopy: (text: string, idx: number) => void }) {
   const m = q.mothers[mi];
   const long = m.author.length > 12;
+  const src = motherSource(m);
+  const db = DECK.questions.find((x) => x.id === m.src.q)!.databases.find((d) => d.id === (m.src.db === 'WOS' ? 'wos' : 'scopus'))!;
+  const reassigned = m.src.q !== q.id;
+  const isCopied = copied === MADRE_COPY;
   return (
     <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 100px', textAlign: 'center' }}>
       <div className="eyebrow a-in">{q.id} · Paper madre {mi + 1} de {q.mothers.length}</div>
-      <div className="a-up d1" style={{ fontSize: long ? 140 : 176, fontWeight: 700, lineHeight: 1.02, marginTop: 34, letterSpacing: '-0.02em', maxWidth: 1400 }}>{m.author}, {m.year}</div>
-      <div className="rule" style={{ marginTop: 44 }} />
-      <div className="a-up d3" style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 40, border: '1px solid #D2D8D4', borderRadius: 999, padding: '8px 22px 8px 8px' }}>
+      <div className="a-up d1" style={{ fontSize: long ? 112 : 136, fontWeight: 700, lineHeight: 1.02, marginTop: 26, letterSpacing: '-0.02em', maxWidth: 1400 }}>{m.author}, {m.year}</div>
+      <div className="a-up d2" style={{ fontSize: 24, fontStyle: 'italic', color: '#38403B', marginTop: 20, maxWidth: 1200, lineHeight: 1.3 }}>{m.title}</div>
+      <div className="a-up d3" style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 28, border: '1px solid #D2D8D4', borderRadius: 999, padding: '8px 22px 8px 8px' }}>
         <span style={{ width: 44, height: 44, borderRadius: '50%', background: '#1F6B45', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 700 }}>{m.presenter.charAt(0)}</span>
         <span style={{ fontSize: 22, color: '#59615C' }}>Expone</span><span style={{ fontSize: 24, fontWeight: 700 }}>{m.presenter}</span>
+      </div>
+      <div className="a-up d4" style={{ marginTop: 40, width: '100%', maxWidth: 1240, borderTop: '1px solid #D9DDDA', paddingTop: 26, display: 'flex', alignItems: 'center', gap: 32, textAlign: 'left' }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 17, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#59615C' }}>Sale de la cadena</div>
+          <div style={{ fontSize: 34, fontWeight: 700, marginTop: 6 }}>
+            {src.label} <span style={{ fontSize: 22, fontWeight: 400, color: '#59615C' }}>· {db.expected} registros</span>
+            {reassigned && <span style={{ fontSize: 20, fontWeight: 700, color: '#8A5A00', background: '#FFF4DC', borderRadius: 4, padding: '3px 10px', marginLeft: 14, verticalAlign: 'middle' }}>Reasignado desde {m.src.q}</span>}
+          </div>
+          <div style={{ fontSize: 19, color: '#3F4742', marginTop: 8 }}>
+            Filtros: {db.filters.filter((f) => f.k !== 'Campo').map((f) => f.v.replace(' (en la cadena)', '')).join(' · ')}
+            {m.also.length > 0 && <> · También en: {m.also.join(', ')}</>}
+          </div>
+        </div>
+        <button type="button" className={'copybtn' + (isCopied ? ' done' : '')} onClick={() => onCopy(src.query, MADRE_COPY)}>
+          {isCopied
+            ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+            : <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1.5" /><path d="M5 15V5.5A1.5 1.5 0 0 1 6.5 4H15" /></svg>}
+          <span>{isCopied ? 'Copiado' : copied === 'fail' ? 'No se pudo copiar' : 'Copiar cadena'}</span>
+          <kbd style={{ marginLeft: 4 }}>C</kbd>
+        </button>
       </div>
     </div>
   );
