@@ -1,0 +1,205 @@
+{
+  "P1": {
+    "blocks": [
+      {
+        "name": "Gestión de procesos y flujos",
+        "terms": [
+          "\"business process management\"",
+          "BPMS",
+          "\"workflow management\"",
+          "\"low-code\"",
+          "\"process automation\""
+        ]
+      },
+      {
+        "name": "Organización pequeña",
+        "terms": [
+          "\"small and medium*\"",
+          "SME*",
+          "\"small business*\"",
+          "startup*"
+        ]
+      },
+      {
+        "name": "Adopción",
+        "terms": [
+          "adoption",
+          "\"perceived usefulness\"",
+          "\"user perception\"",
+          "barrier*",
+          "\"organi?ational culture\""
+        ]
+      }
+    ],
+    "queries": {
+      "SCOPUS": "TITLE-ABS-KEY ( ( \"business process management\" OR BPMS OR \"workflow management\" OR \"low-code\" OR \"process automation\" ) AND ( \"small and medium*\" OR SME* OR \"small business*\" OR startup* ) AND ( adoption OR \"perceived usefulness\" OR \"user perception\" OR barrier* OR \"organi?ational culture\" ) ) AND PUBYEAR > 2024 AND PUBYEAR < 2027 AND SRCTYPE ( j ) AND DOCTYPE ( ar )",
+      "WOS": "(\"business process management\" OR BPMS OR \"workflow management\" OR \"low-code\" OR \"process automation\") AND (\"small and medium*\" OR SME* OR \"small business*\" OR startup*) AND (adoption OR \"perceived usefulness\" OR \"user perception\" OR barrier* OR \"organi?ational culture\")",
+      "IEEE": "(\"All Metadata\":\"business process management\" OR \"All Metadata\":BPMS OR \"All Metadata\":\"workflow management\" OR \"All Metadata\":\"low-code\" OR \"All Metadata\":\"process automation\") AND (\"All Metadata\":SME OR \"All Metadata\":\"small and medium\" OR \"All Metadata\":\"small business\" OR \"All Metadata\":startup) AND (\"All Metadata\":adoption OR \"All Metadata\":\"perceived usefulness\" OR \"All Metadata\":\"user perception\" OR \"All Metadata\":barriers OR \"All Metadata\":\"organizational culture\")"
+    }
+  },
+  "P2": {
+    "blocks": [
+      {
+        "name": "Motor de flujos",
+        "terms": [
+          "\"workflow engine\"",
+          "\"workflow management system\"",
+          "\"business process management system\"",
+          "BPMS",
+          "\"process orchestration\"",
+          "\"process-aware information system*\""
+        ]
+      },
+      {
+        "name": "Coordinación humana",
+        "terms": [
+          "configurab*",
+          "\"human task*\"",
+          "\"task assignment\"",
+          "\"resource allocation\"",
+          "delegat*",
+          "escalat*",
+          "deadline*",
+          "\"temporal constraint*\"",
+          "\"separation of duties\""
+        ]
+      }
+    ],
+    "queries": {
+      "SCOPUS": "TITLE-ABS-KEY ( ( \"workflow engine\" OR \"workflow management system\" OR \"business process management system\" OR BPMS OR \"process orchestration\" OR \"process-aware information system*\" ) AND ( configurab* OR \"human task*\" OR \"task assignment\" OR \"resource allocation\" OR delegat* OR escalat* OR deadline* OR \"temporal constraint*\" OR \"separation of duties\" ) ) AND PUBYEAR > 2024 AND PUBYEAR < 2027 AND SRCTYPE ( j ) AND DOCTYPE ( ar )",
+      "WOS": "(\"workflow engine\" OR \"workflow management system\" OR \"business process management system\" OR BPMS OR \"process orchestration\" OR \"process-aware information system*\") AND (configurab* OR \"human task*\" OR \"task assignment\" OR \"resource allocation\" OR delegat* OR escalat* OR deadline* OR \"temporal constraint*\" OR \"separation of duties\")",
+      "IEEE": "(\"All Metadata\":\"workflow engine\" OR \"All Metadata\":\"workflow management system\" OR \"All Metadata\":\"business process management system\" OR \"All Metadata\":BPMS OR \"All Metadata\":\"process orchestration\") AND (\"All Metadata\":configurable OR \"All Metadata\":\"human task\" OR \"All Metadata\":\"task assignment\" OR \"All Metadata\":\"resource allocation\" OR \"All Metadata\":delegation OR \"All Metadata\":escalation OR \"All Metadata\":deadline OR \"All Metadata\":\"temporal constraint\" OR \"All Metadata\":\"separation of duties\")"
+    }
+  },
+  "P3": {
+    "blocks": [
+      {
+        "name": "IA generativa",
+        "terms": [
+          "\"large language model*\"",
+          "LLM*",
+          "\"generative AI\""
+        ]
+      },
+      {
+        "name": "Proceso o canal de solicitudes",
+        "terms": [
+          "\"business process*\"",
+          "workflow*",
+          "\"service request*\"",
+          "\"approval process*\"",
+          "ticket*",
+          "\"help desk\"",
+          "\"service desk\""
+        ]
+      },
+      {
+        "name": "Creación asistida de la solicitud",
+        "terms": [
+          "\"request classification\"",
+          "\"ticket classification\"",
+          "\"intent classification\"",
+          "\"intent detection\"",
+          "\"text classification\"",
+          "\"information extraction\"",
+          "\"form filling\"",
+          "\"slot filling\"",
+          "\"ticket routing\"",
+          "\"task routing\"",
+          "\"request triage\"",
+          "\"ticket triage\""
+        ]
+      }
+    ],
+    "queries": {
+      "SCOPUS": "TITLE-ABS-KEY ( ( \"large language model*\" OR LLM* OR \"generative AI\" ) AND ( \"business process*\" OR workflow* OR \"service request*\" OR \"approval process*\" OR ticket* OR \"help desk\" OR \"service desk\" ) AND ( \"request classification\" OR \"ticket classification\" OR \"intent classification\" OR \"intent detection\" OR \"text classification\" OR \"information extraction\" OR \"form filling\" OR \"slot filling\" OR \"ticket routing\" OR \"task routing\" OR \"request triage\" OR \"ticket triage\" ) ) AND PUBYEAR > 2024 AND PUBYEAR < 2027 AND SRCTYPE ( j ) AND DOCTYPE ( ar )",
+      "WOS": "(\"large language model*\" OR LLM* OR \"generative AI\") AND (\"business process*\" OR workflow* OR \"service request*\" OR \"approval process*\" OR ticket* OR \"help desk\" OR \"service desk\") AND (\"request classification\" OR \"ticket classification\" OR \"intent classification\" OR \"intent detection\" OR \"text classification\" OR \"information extraction\" OR \"form filling\" OR \"slot filling\" OR \"ticket routing\" OR \"task routing\" OR \"request triage\" OR \"ticket triage\")",
+      "IEEE": "(\"All Metadata\":\"large language model\" OR \"All Metadata\":LLM OR \"All Metadata\":\"generative AI\") AND (\"All Metadata\":\"business process\" OR \"All Metadata\":workflow OR \"All Metadata\":\"service request\" OR \"All Metadata\":\"approval process\" OR \"All Metadata\":ticket OR \"All Metadata\":\"help desk\" OR \"All Metadata\":\"service desk\") AND (\"All Metadata\":\"request classification\" OR \"All Metadata\":\"ticket classification\" OR \"All Metadata\":\"intent classification\" OR \"All Metadata\":\"intent detection\" OR \"All Metadata\":\"text classification\" OR \"All Metadata\":\"information extraction\" OR \"All Metadata\":\"form filling\" OR \"All Metadata\":\"slot filling\" OR \"All Metadata\":\"ticket routing\" OR \"All Metadata\":\"task routing\")"
+    }
+  },
+  "P4": {
+    "blocks": [
+      {
+        "name": "Medición del proceso",
+        "terms": [
+          "\"process mining\"",
+          "\"event log*\"",
+          "\"process performance\"",
+          "\"performance indicator*\""
+        ]
+      },
+      {
+        "name": "Tiempo y demora",
+        "terms": [
+          "\"cycle time\"",
+          "\"throughput time\"",
+          "bottleneck*",
+          "\"waiting time\"",
+          "delay*",
+          "overdue"
+        ]
+      },
+      {
+        "name": "Proceso",
+        "terms": [
+          "\"business process*\"",
+          "workflow*",
+          "approval"
+        ]
+      }
+    ],
+    "queries": {
+      "SCOPUS": "TITLE-ABS-KEY ( ( \"process mining\" OR \"event log*\" OR \"process performance\" OR \"performance indicator*\" ) AND ( \"cycle time\" OR \"throughput time\" OR bottleneck* OR \"waiting time\" OR delay* OR overdue ) AND ( \"business process*\" OR workflow* OR approval ) ) AND PUBYEAR > 2024 AND PUBYEAR < 2027 AND SRCTYPE ( j ) AND DOCTYPE ( ar )",
+      "WOS": "(\"process mining\" OR \"event log*\" OR \"process performance\" OR \"performance indicator*\") AND (\"cycle time\" OR \"throughput time\" OR bottleneck* OR \"waiting time\" OR delay* OR overdue) AND (\"business process*\" OR workflow* OR approval)",
+      "IEEE": "(\"All Metadata\":\"process mining\" OR \"All Metadata\":\"event log\" OR \"All Metadata\":\"process performance\" OR \"All Metadata\":\"performance indicator\") AND (\"All Metadata\":\"cycle time\" OR \"All Metadata\":\"throughput time\" OR \"All Metadata\":bottleneck OR \"All Metadata\":\"waiting time\" OR \"All Metadata\":delay OR \"All Metadata\":overdue) AND (\"All Metadata\":\"business process\" OR \"All Metadata\":workflow OR \"All Metadata\":approval)"
+    }
+  },
+  "P5": {
+    "blocks": [
+      {
+        "name": "Voz y transcripción",
+        "terms": [
+          "\"speech recognition\"",
+          "\"speech-to-text\"",
+          "ASR",
+          "transcript*",
+          "\"spoken language\"",
+          "\"voice command*\"",
+          "\"voice assistant*\"",
+          "\"voice interface*\""
+        ]
+      },
+      {
+        "name": "Reunión de trabajo",
+        "terms": [
+          "meeting*",
+          "\"workplace conversation*\"",
+          "\"team conversation*\"",
+          "\"spoken dialogue*\"",
+          "\"voice note*\""
+        ]
+      },
+      {
+        "name": "Tarea o compromiso",
+        "terms": [
+          "\"action item*\"",
+          "\"task extraction\"",
+          "\"commitment detection\"",
+          "\"decision extraction\"",
+          "\"decision detection\"",
+          "\"meeting summar*\"",
+          "\"to-do\"",
+          "\"task creation\""
+        ]
+      }
+    ],
+    "queries": {
+      "SCOPUS": "TITLE-ABS-KEY ( ( \"speech recognition\" OR \"speech-to-text\" OR ASR OR transcript* OR \"spoken language\" OR \"voice command*\" OR \"voice assistant*\" OR \"voice interface*\" ) AND ( meeting* OR \"workplace conversation*\" OR \"team conversation*\" OR \"spoken dialogue*\" OR \"voice note*\" ) AND ( \"action item*\" OR \"task extraction\" OR \"commitment detection\" OR \"decision extraction\" OR \"decision detection\" OR \"meeting summar*\" OR \"to-do\" OR \"task creation\" ) ) AND PUBYEAR > 2024 AND PUBYEAR < 2027 AND SRCTYPE ( j ) AND DOCTYPE ( ar )",
+      "WOS": "(\"speech recognition\" OR \"speech-to-text\" OR ASR OR transcript* OR \"spoken language\" OR \"voice command*\" OR \"voice assistant*\" OR \"voice interface*\") AND (meeting* OR \"workplace conversation*\" OR \"team conversation*\" OR \"spoken dialogue*\" OR \"voice note*\") AND (\"action item*\" OR \"task extraction\" OR \"commitment detection\" OR \"decision extraction\" OR \"decision detection\" OR \"meeting summar*\" OR \"to-do\" OR \"task creation\")",
+      "IEEE": "(\"All Metadata\":\"speech recognition\" OR \"All Metadata\":\"speech-to-text\" OR \"All Metadata\":ASR OR \"All Metadata\":transcript OR \"All Metadata\":\"spoken language\" OR \"All Metadata\":\"voice command\" OR \"All Metadata\":\"voice assistant\" OR \"All Metadata\":\"voice interface\") AND (\"All Metadata\":meeting OR \"All Metadata\":\"workplace conversation\" OR \"All Metadata\":\"team conversation\" OR \"All Metadata\":\"spoken dialogue\" OR \"All Metadata\":\"voice note\") AND (\"All Metadata\":\"action item\" OR \"All Metadata\":\"task extraction\" OR \"All Metadata\":\"commitment detection\" OR \"All Metadata\":\"decision extraction\" OR \"All Metadata\":\"decision detection\" OR \"All Metadata\":\"meeting summarization\" OR \"All Metadata\":\"to-do\" OR \"All Metadata\":\"task creation\")",
+      "SCOPUSB": "TITLE-ABS-KEY ( ( meeting* OR \"spoken conversation*\" OR \"multi-party conversation*\" OR \"multi-party dialogue*\" ) AND ( \"action item*\" OR \"task extraction\" OR \"commitment detection\" OR \"decision extraction\" OR \"decision detection\" OR \"meeting summar*\" OR minuting OR \"meeting minutes\" OR \"to-do\" ) ) AND PUBYEAR > 2024 AND PUBYEAR < 2027 AND SRCTYPE ( j ) AND DOCTYPE ( ar )",
+      "WOSB": "(meeting* OR \"spoken conversation*\" OR \"multi-party conversation*\" OR \"multi-party dialogue*\") AND (\"action item*\" OR \"task extraction\" OR \"commitment detection\" OR \"decision extraction\" OR \"decision detection\" OR \"meeting summar*\" OR minuting OR \"meeting minutes\" OR \"to-do\")",
+      "IEEEB": "(\"All Metadata\":meeting OR \"All Metadata\":meetings OR \"All Metadata\":\"spoken conversation\" OR \"All Metadata\":\"multi-party conversation\" OR \"All Metadata\":\"multi-party dialogue\") AND (\"All Metadata\":\"action item\" OR \"All Metadata\":\"action items\" OR \"All Metadata\":\"task extraction\" OR \"All Metadata\":\"commitment detection\" OR \"All Metadata\":\"decision extraction\" OR \"All Metadata\":\"decision detection\" OR \"All Metadata\":\"meeting summarization\" OR \"All Metadata\":\"meeting summary\" OR \"All Metadata\":\"automatic minuting\" OR \"All Metadata\":\"meeting minutes\" OR \"All Metadata\":\"to-do\")"
+    }
+  }
+}
