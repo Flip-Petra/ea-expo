@@ -183,7 +183,7 @@ export const DECK = {
         { id: 'wosB', label: 'WoS · compl.', field: 'Topic (TS)', query: SR.P5.queries.WOSB, filters: wosFilters(), expected: 8, date: '2026-11-04', note: 'Complementaria: devolvió los mismos 8 registros de la principal.' },
         { id: 'ieeeB', label: 'IEEE · compl.', field: 'All Metadata', query: SR.P5.queries.IEEEB, filters: ieeeFilters(true), expected: 13, date: '2026-11-07', note: 'Reexportada con filtro de año (antes 21; los 8 de diferencia eran de 2024).' },
       ],
-      criteria: ['Tareas, acuerdos y decisiones', 'Responsable y plazo', 'Validación humana antes de registrar', 'Reconocimiento de voz y de hablantes', 'Privacidad, consentimiento y modelo local', 'Uso sin entrenamiento', 'Resumen o acta general'],
+      criteria: ['Tareas, acuerdos y decisiones', 'Responsable y plazo', 'Validación humana antes de registrar', 'Reconocimiento de voz y de hablantes en audio real', 'Privacidad, consentimiento y modelo local', 'Uso sin entrenamiento', 'Resumen o acta general'],
       papers: [
         { name: 'Chen', year: 2025, scores: [4, 2, 1, 5, 4, 4, 5] },
         { name: 'Sood', year: 2026, scores: [4, 2, 2, 1, 3, 5, 4] },
