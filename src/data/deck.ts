@@ -159,7 +159,7 @@ export const DECK = {
         { name: 'Butoracová', year: 2026, scores: [4, 1, 3, 4, 4, 3, 2, 1] },
         { name: 'Hendrata', year: 2026, scores: [4, 1, 1, 1, 1, 4, 5, 1] },
         { name: 'Rubensson', year: 2025, scores: [4, 1, 1, 1, 1, 1, 4, 1] },
-        { name: 'Malashin', year: 2025, scores: [4, 5, 1, 1, 1, 5, 2, 1] },
+        { name: 'Fang', year: 2026, scores: [4, 3, 2, 1, 1, 1, 1, 1] },
         { name: 'López-Pintado', year: 2025, scores: [4, 1, 1, 2, 5, 3, 1, 1] },
         { name: 'Hoogmoed', year: 2026, scores: [3, 1, 1, 1, 4, 3, 4, 1] },
         { name: 'Guo', year: 2026, scores: [4, 5, 1, 3, 4, 5, 2, 1] },
@@ -167,8 +167,8 @@ export const DECK = {
       mothers: [
         { author: 'Guo', year: 2026, presenter: 'Fabrizio' },
         { author: 'Butoracová', year: 2026, presenter: 'Stefanie' },
-        { author: 'Malashin', year: 2025, presenter: 'Fabrizio' },
         { author: 'Park', year: 2025, presenter: 'Stefanie' },
+        { author: 'López-Pintado', year: 2025, presenter: 'Fabrizio' },
       ],
     },
     {
